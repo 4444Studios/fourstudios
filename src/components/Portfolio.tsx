@@ -31,8 +31,10 @@ const Portfolio = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-vampire-black/20 via-transparent to-vampire-black/40 z-0 pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="mb-12">
-                    <h2 className="text-5xl md:text-7xl font-bold text-white font-oswald uppercase tracking-tight">Our Work</h2>
+                <div className="mb-20">
+                    <h2 className="text-4xl md:text-6xl font-sans font-medium tracking-tight">
+                        Our work.
+                    </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
