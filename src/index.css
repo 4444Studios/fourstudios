@@ -3,7 +3,41 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
   body {
     @apply bg-vampire-black text-gray-200 antialiased;
+  }
+
+  body.inquiry-open nav {
+    @apply invisible pointer-events-none;
+  }
+}
+
+@layer components {
+  .matrix-surface {
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.04) 2px,
+        rgba(0, 0, 0, 0.04) 4px
+      ),
+      radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  .work-scanlines {
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.18) 2px,
+      rgba(0, 0, 0, 0.18) 4px
+    );
   }
 }

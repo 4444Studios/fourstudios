@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
-import Pricing from './components/Pricing';
+import Engagements from './components/Engagements';
 import Contact from './components/Contact';
 import MatrixBackground from './components/MatrixBackground';
 import ProjectForm from './components/ProjectForm';
@@ -21,18 +21,20 @@ function App() {
       <div className="fixed inset-0 z-0">
         <MatrixBackground opacity={0.6} />
       </div>
+      <div className="fixed inset-0 z-[1] matrix-surface" />
+      <Navbar />
       <div className="relative z-10">
-        <Navbar />
         <Hero />
         <Portfolio />
-        <Pricing onOpenProjectForm={handleOpenProjectForm} />
+        <Engagements onOpenProjectForm={handleOpenProjectForm} />
         <Contact onOpenProjectForm={() => handleOpenProjectForm()} />
       </div>
-      <ProjectForm
-        isOpen={isProjectFormOpen}
-        onClose={() => setIsProjectFormOpen(false)}
-        initialPackage={selectedPackage}
-      />
+      {isProjectFormOpen && (
+        <ProjectForm
+          onClose={() => setIsProjectFormOpen(false)}
+          initialPackage={selectedPackage}
+        />
+      )}
     </div>
   );
 }

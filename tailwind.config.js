@@ -7,20 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'ferrari-red': '#8a0303', // Now Blood Red
         'blood-red': '#8a0303',
-        'fresh-blood': '#ff0000',
-        'leather-black': '#030000', // Now Vampire Black
         'vampire-black': '#030000',
       },
       fontFamily: {
         oswald: ['Oswald', 'sans-serif'],
+        sans: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
-      backgroundImage: {
-        'vampire-gradient': 'linear-gradient(to bottom, transparent, #030000)',
-      }
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 3s infinite',
+      },
     },
   },
   plugins: [],
 }
-

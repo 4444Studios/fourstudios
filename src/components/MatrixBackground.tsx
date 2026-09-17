@@ -13,27 +13,21 @@ const MatrixBackground = ({ opacity = 0.15 }) => {
         let width = window.innerWidth;
         let height = window.innerHeight;
 
-        // Set canvas dimensions
         canvas.width = width;
         canvas.height = height;
 
-        // Configuration
         const fontSize = 16;
         const columns = Math.ceil(width / fontSize);
-        const drops: number[] = new Array(columns).fill(1); // Y-coordinate of each drop
+        const drops: number[] = new Array(columns).fill(1);
 
-        const chars = "4"; // The matrix character
+        const chars = "4";
 
         const draw = () => {
-            // Fade out the previous frame to create trails
-            // We use 'destination-out' to fade existing pixels to transparent
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.globalCompositeOperation = 'destination-out';
             ctx.fillRect(0, 0, width, height);
 
-            // Reset to default for drawing text
             ctx.globalCompositeOperation = 'source-over';
-            ctx.fillStyle = '#ff4d4d'; // Brighter red
             ctx.font = `${fontSize}px monospace`;
 
             for (let i = 0; i < drops.length; i++) {
@@ -41,25 +35,29 @@ const MatrixBackground = ({ opacity = 0.15 }) => {
                 const x = i * fontSize;
                 const y = drops[i] * fontSize;
 
-                // Draw the character
-                // Random opacity for glitch effect
-                ctx.globalAlpha = Math.random() > 0.95 ? 1 : 0.8;
+                // Dimmer trail just behind the head
+                if (drops[i] > 1) {
+                    ctx.fillStyle = '#8a0303';
+                    ctx.globalAlpha = 0.35;
+                    ctx.fillText(text, x, y - fontSize);
+                }
+
+                // Brighter head
+                ctx.fillStyle = Math.random() > 0.9 ? '#fff5f5' : '#ff4d4d';
+                ctx.globalAlpha = Math.random() > 0.95 ? 1 : 0.85;
                 ctx.fillText(text, x, y);
                 ctx.globalAlpha = 1;
 
-                // Reset drop if it goes off screen (randomly)
                 if (y > height && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
 
-                // Increment Y coordinate
                 drops[i]++;
             }
         };
 
-        // Animation Loop
         let animationFrameId: number;
-        const interval = 50; // Control speed
+        const interval = 50;
         let lastTime = 0;
 
         const animate = (time: number) => {
@@ -72,15 +70,12 @@ const MatrixBackground = ({ opacity = 0.15 }) => {
 
         animationFrameId = requestAnimationFrame(animate);
 
-        // Handle Resize
         const handleResize = () => {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-            // Re-initialize drops to fit new width
             const newColumns = Math.ceil(width / fontSize);
-            // Preserve existing drops if possible, or fill new ones
             if (newColumns > drops.length) {
                 const added = new Array(newColumns - drops.length).fill(0);
                 drops.push(...added);
